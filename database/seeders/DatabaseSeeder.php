@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Database\Seeders\RoomSeeder;
+use Database\Seeders\CategorySeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +17,24 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        User::create([
+            'name' => 'Admin',
+            'email' => 'axnvee18@gmail.com',
+            'role' => 'admin',
+            'image' => '',
+            'password' => bcrypt('password'),
+        ]);
+        User::create([
+            'name' => 'Guest',
+            'email' => 'guest@gmail.com',
+            'role' => 'guest',
+            'image' => '',
+            'password' => bcrypt('password'),
+        ]);
+
+        $this->call([
+            RoomSeeder::class,
+            CategorySeeder::class
         ]);
     }
 }

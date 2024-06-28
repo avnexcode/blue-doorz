@@ -10,6 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $table = "users";
+    protected $primaryKey = "id";
 
     /**
      * The attributes that are mass assignable.
@@ -19,6 +21,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'role',
+        'image',
         'password',
     ];
 
@@ -43,5 +47,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function hasRole(String $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    public function isNotAdmin() {
+        return $this->role !== 'admin';
     }
 }

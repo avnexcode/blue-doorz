@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AuthenticatedSessionController extends Controller
 {
@@ -25,10 +27,16 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+        $user = $request->user();
 
+        if ($user->hasRole('admin')) {
+            Alert::success('Berhasil Login Sebagai Admin');
+            return redirect()->intended(route('dashboard', absolute: false));
+        }
+
+        Alert::success('Berhasil Login', "Selamat Memilih Kamar Yang Anda Suka! Jangan Lupa Menghabiskan Uang Anda!");
         $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+        return redirect()->intended(route('page.welcome', absolute: false));
     }
 
     /**
