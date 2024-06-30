@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
 
         Alert::success('Berhasil Login', "Selamat Memilih Kamar Yang Anda Suka! Jangan Lupa Menghabiskan Uang Anda!");
         $request->session()->regenerate();
-        return redirect()->intended(route('page.welcome', absolute: false));
+        return redirect()->intended(route('pages.home', absolute: false));
     }
 
     /**

@@ -12,6 +12,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     protected $table = "users";
     protected $primaryKey = "id";
+    protected $keyType = "int";
+    protected $guarded = ["id"];
+    public $timestamps = true;
+    public $incrementing = true;
 
     /**
      * The attributes that are mass assignable.
@@ -55,5 +59,9 @@ class User extends Authenticatable
 
     public function isNotAdmin() {
         return $this->role !== 'admin';
+    }
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class, 'user_id');
     }
 }

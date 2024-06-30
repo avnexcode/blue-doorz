@@ -29,8 +29,6 @@
             color: white;
         }
 
-        
-
         .button_file_input:hover .svg-icon {
             animation: spin 1s linear infinite;
         }
@@ -67,7 +65,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Perbarui informasi profil dan alamat email akun Anda.") }}
+            {{ __('Perbarui informasi profil dan alamat email akun Anda.') }}
         </p>
     </header>
 
@@ -113,13 +111,20 @@
         </div>
 
         <div>
-            <x-input-label for="image" :value="__('Image Profile')" />
-            <img src="{{ asset('storage/' . $user->image) }}" alt="Profile User" width="150" class="mb-3">
-
+            <x-input-label for="image" :value="__('Image Profile')" class="mb-2"/>
             <!-- Hidden File Input -->
-            {{-- <input type="file" id="image" name="image" class="hidden" onchange="updateFileName()"> --}}
-            <input type="file" id="image" name="image" class="hidden">
-
+            <div class="flex gap-5">
+                <div class="flex flex-col">
+                    <img src="{{ asset('storage/' . $user->image) }}" alt="Profile Image"
+                        class="mb-3 w-[150px] aspect-[3/4] object-cover border border-gray-600">
+                    <p class="text-center">Gambar Lama</p>
+                </div>
+                <div class="flex flex-col">
+                    <img id="image-room" class="mb-3 w-[150px] aspect-[3/4] object-cover border border-gray-600">
+                    <p class="text-center">Gambar Baru</p>
+                </div>
+            </div>
+            <input type="file" id="image" name="image" class="hidden" onchange="previewImage()">
             <!-- Custom Button -->
             <label for="image" class="button_file_input">
                 <svg class="svg-icon" width="24" viewBox="0 0 24 24" height="24" fill="none">

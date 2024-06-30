@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->nullable(false);
+            $table->foreignId('category_id')->nullable(true);
             $table->string('name', 100)->nullable(false);
             $table->string('room_number', 100)->nullable(false)->unique();
             $table->string('slug', 100)->nullable(false)->unique();
             $table->string('image', 255)->nullable(false);
-            $table->string('description', 255)->nullable(false);
+            $table->text('description')->nullable(false);
             $table->string('price', 50)->nullable(false);
             $table->enum('status', ['booked', 'available'])->nullable(false);
             $table->timestamps();

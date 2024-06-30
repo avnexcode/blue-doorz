@@ -17,7 +17,7 @@ class UserRolesMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->user()->isNotAdmin()) {
-            return redirect()->route('page.welcome');
+            return redirect()->route('pages.home');
         }
         return $next($request);
     }

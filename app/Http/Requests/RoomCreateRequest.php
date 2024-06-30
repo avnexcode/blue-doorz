@@ -22,12 +22,12 @@ class RoomCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'category_id' => ['required', 'min:1'],
+            'category_id' => ['min:1', 'integer'],
             'name' => ['required', 'max:100'],
-            'room_number' => ['required', 'min:3'],
+            'room_number' => ['required', 'min:3', 'unique:rooms,room_number', 'integer'],
             'image' => ['required', 'file', 'mimes:jpeg,png,jpg', 'max:10240'],
-            'description' => ['required', 'max:255', 'min:100'],
-            'price' => ['required'],
+            'description' => ['required', 'max:10000', 'min:100'],
+            'price' => ['required', 'integer'],
             'status' => ['required'],
         ];
     }
@@ -35,7 +35,7 @@ class RoomCreateRequest extends FormRequest
     public function messages()
     {
         return [
-            "category_id.required" => "Kategori tidak boleh kosong.",
+            "category_id.integer" => "Kategori harus berupa angka.",
             "category_id.min" => "Kategori minimal harus 1.",
 
             "name.required" => "Nama tidak boleh kosong.",
@@ -43,6 +43,8 @@ class RoomCreateRequest extends FormRequest
 
             "room_number.required" => "Nomor ruangan tidak boleh kosong.",
             "room_number.min" => "Nomor ruangan minimal 3 karakter.",
+            "room_number.integer" => "Nomor ruangan harus berupa angka.",
+            "room_number.unique" => "Nomor ruangan sudah digunakan. Harap masukkan nomor lain.",
 
             "image.required" => "Gambar tidak boleh kosong.",
             "image.file" => "Gambar harus berupa file.",
@@ -50,10 +52,11 @@ class RoomCreateRequest extends FormRequest
             "image.max" => "Ukuran gambar maksimal 10MB.",
 
             "description.required" => "Deskripsi tidak boleh kosong.",
-            "description.max" => "Deskripsi maksimal 255 karakter.",
+            "description.max" => "Deskripsi maksimal 10000 karakter.",
             "description.min" => "Deskripsi minimal 100 karakter.",
 
             "price.required" => "Harga tidak boleh kosong.",
+            "price.integer" => "Harga harus berupa angka.",
 
             "status.required" => "Status tidak boleh kosong.",
         ];

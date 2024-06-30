@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Room extends Model
 {
@@ -11,18 +13,16 @@ class Room extends Model
 
     protected $table = "rooms";
     protected $primaryKey = "id";
-    // protected $timestamps = true;
-    // protected $cast = [
-    //     "price" => "string",
-    //     "status" => "string"
-    // ];
+    protected $keyType = "int";
+    protected $guarded = ["id"];
+    public $timestamps = true;
+    public $incrementing = true;
     protected $hidden = [
         "password"
     ];
-    protected $guarded = [
-        "id"
+    protected $with = [
+        "category",
     ];
-
     protected $fillable = [
         "category_id",
         "name",
@@ -33,16 +33,27 @@ class Room extends Model
         "price",
         "status"
     ];
-
-    public function scoopFilter($query, array $filters)
+    public function category()
     {
+        return $this->belongsTo(Category::class, "category_id");
+    }
+    public function transactions() {
+        return $this->hasMany(Transaction::class, 'room_id');
+    }
+    
+    public function scopeFilter($query, array $filters)
+    {
+        $filters = array_map(fn($value) => is_string($value) ? strtolower($value) : $value, $filters);
+
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) => $query
-                ->where('name', 'like', "%$search")
-                ->where('category', 'like', "%$search")
-                ->where('price', 'like', "%$search")
-                ->where('status', 'like', "%$search")
+                ->where('name', 'like', "%$search%")
+                ->orWhere('price', 'like', "%$search%")
+                ->orWhere('status', 'like', "%$search%")
+                ->orWhereHas('category', fn($query) => 
+                    $query->where('name', 'like', "%$search%")
+                )
         );
 
         $query->when(
