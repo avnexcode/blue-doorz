@@ -15,7 +15,6 @@
                     {{-- TARUH KONTEN DISINI --}}
                     <main>
                         <div class="rounded-t mb-0 px-4 py-3 border-0">
-
                             <div class="flex flex-wrap items-center justify-between">
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                                     <h3 class="font-semibold text-base text-blueGray-700">AH AH AH</h3>
@@ -60,6 +59,10 @@
                                         </th>
                                         <th
                                             class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                            Total Day
+                                        </th>
+                                        <th
+                                            class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                             Price
                                         </th>
                                         <th
@@ -89,8 +92,12 @@
                                                     {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->room->name))) }}
                                                 </td>
                                                 <td
+                                                    class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 ">
+                                                    {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->total_day))) }}
+                                                </td>
+                                                <td
                                                     class="border-t-0 px-6 align-center border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
-                                                    Rp. {{ number_format($transaction->price, 0, ',', '.') }}
+                                                    Rp. {{ number_format($transaction->total_price, 0, ',', '.') }}
                                                 </td>
                                                 <td
                                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4">
@@ -124,7 +131,7 @@
                                 </tbody>
                             </table>
                             <div class="py-10 px-10">
-                                {{-- {{ $transactions->links('') }} --}}
+                                {{ $transactions->links() }}
                             </div>
                         </div>
                     </main>

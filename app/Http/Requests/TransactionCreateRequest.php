@@ -26,7 +26,7 @@ class TransactionCreateRequest extends FormRequest
             "room_id" => ["required", "integer", "min:1"],
             "started_time" => ["required", "date", "unique:transactions,started_time,NULL,id,end_time,NULL"],
             "end_time" => ["required", "date", "after:started_time"],
-            "price" => ["required"],
+            "total_price" => ["required"],
             "phone" => ["required", "digits_between:10,13"],
             "nik" => ["required", "digits:16"],
             "payment_method" => ["required", "in:cash,dana,credit"],
@@ -52,7 +52,7 @@ class TransactionCreateRequest extends FormRequest
             "end_time.date" => "Waktu berakhir sewa harus berupa tanggal yang valid.",
             "end_time.after" => "Waktu berakhir sewa harus lebih besar dari waktu mulai sewa.",
 
-            "price.required" => "Harga sewa wajib diisi.",
+            "total_price.required" => "Harga sewa wajib diisi.",
 
             "phone.required" => "Nomor telepon wajib diisi.",
             "phone.digits_between" => "Nomor telepon harus terdiri dari 10 hingga 13 digit.",

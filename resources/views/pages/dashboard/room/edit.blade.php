@@ -168,7 +168,6 @@
                                     <option value="booked" {{ $room->status == 'booked' ? 'selected' : '' }}>Booked
                                     </option>
                                 </select>
-
                                 <x-input-error class="mt-2" :messages="$errors->get('status')" />
                             </div>
                             {{-- Input Description --}}

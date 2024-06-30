@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\TransactionResource;
+use App\Models\Room;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Resources\TransactionResource;
+use App\Http\Requests\TransactionUpdateRequest;
 
 class TransactionController extends Controller
 {
@@ -52,15 +56,29 @@ class TransactionController extends Controller
      */
     public function edit(Transaction $transaction)
     {
-        //
+        return view("pages.dashboard.transaction.edit", [
+            "title" => "Transaction Update",
+            "transaction" => $transaction
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(TransactionUpdateRequest $request, Transaction $transaction)
     {
-        //
+        $validatedData = $request->validated();
+        $transaction->status = $validatedData["status"];
+
+        if ($validatedData['status'] === 'expired' || $validatedData['status'] === 'canceled') {
+            $room = Room::findOrFail($validatedData['room_id']);
+            $room->status = 'available';
+            $room->save();
+        }
+
+        $transaction->save();
+        Alert::success('Success', 'Memperbarui status transaksi.');
+        return redirect(route('transactions.index'));
     }
 
     /**
@@ -68,6 +86,8 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
-        //
+        $transaction->delete();
+        Alert::success('Berhasil', 'Menghapus data.');
+        return redirect(route('transactions.index'));
     }
 }

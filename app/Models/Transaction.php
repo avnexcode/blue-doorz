@@ -19,10 +19,11 @@ class Transaction extends Model
         "room_id",
         "started_time",
         "end_time",
-        "price",
+        "total_price",
         "payment_method",
         "status",
         "phone",
+        "total_day",
         "nik"
     ];
 

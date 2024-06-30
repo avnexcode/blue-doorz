@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\Transaction;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\TransactionCreateRequest;
 
@@ -25,7 +24,8 @@ class BookingController extends Controller
         $validatedData = $request->validated();
         $validatedData['status'] = 'pending';
         $validatedData['user_id'] = auth()->id();
-        $validatedData['price'] = $this->calculatePrice($validatedData);
+        $validatedData['total_price'] = $this->calculateDay($validatedData) * $validatedData['total_price'];
+        $validatedData["total_day"] = $this->calculateDay($validatedData);
 
         if ($this->isRoomAvailable($validatedData['room_id'])) {
             $this->reserveRoom($validatedData['room_id']);
@@ -37,12 +37,12 @@ class BookingController extends Controller
         }
     }
 
-    private function calculatePrice(array $data)
+    private function calculateDay(array $data)
     {
         $startedTime = Carbon::parse($data['started_time']);
         $endTime = Carbon::parse($data['end_time']);
         $numberOfDays = $startedTime->diffInDays($endTime);
-        return $numberOfDays * $data['price'];
+        return $numberOfDays;
     }
 
     private function isRoomAvailable(int $roomId)

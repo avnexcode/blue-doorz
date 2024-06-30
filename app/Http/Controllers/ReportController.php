@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReportResource;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $reports = Report::with('transaction')->filter(request()->only('search'))->paginate(10);
         return view("pages.dashboard.report.index", [
-            "title" => "Dashboard Report"
+            "title" => "Dashboard Report",
+            "reports" => ReportResource::collection($reports)
         ]);
     }
 

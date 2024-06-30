@@ -55,7 +55,17 @@
                         </div>
                         <div class="my-5 flex flex-col">
                             <x-input-label :value="__('Price')" />
-                            <x-text-input value="Rp. {{ number_format($transaction->price, 0, ',', '.') }}" readonly
+                            <x-text-input value="Rp. {{ number_format($transaction->room->price, 0, ',', '.') }}" readonly
+                                disabled />
+                        </div>
+                        <div class="my-5 flex flex-col">
+                            <x-input-label :value="__('Total Day')" />
+                            <x-text-input value="{{ $transaction->total_day }}" readonly
+                                disabled />
+                        </div>
+                        <div class="my-5 flex flex-col">
+                            <x-input-label :value="__('Total Price')" />
+                            <x-text-input value="Rp. {{ number_format($transaction->total_price, 0, ',', '.') }}" readonly
                                 disabled />
                         </div>
                         <div class="my-5 flex flex-col">
@@ -74,7 +84,7 @@
                             <a class="bg-gray-500 text-white active:bg-gray-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                 href="{{ route('transactions.index') }}">Back</a>
                             <a class="bg-sky-500 text-white active:bg-sky-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
-                                href="{{ route('transactions.edit', $transaction->id) }}">Edit</a>
+                                href="{{ route('transactions.edit', $transaction->id) }}">Save</a>
                             <form action="{{ route('transactions.destroy', $transaction->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

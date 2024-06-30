@@ -11,7 +11,7 @@
             @csrf
             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
             <input type="hidden" name="room_id" value="{{ $room->id }}">
-            <input type="hidden" name="price" value="{{ $priceWithTax }}">
+            <input type="hidden" name="total_price" value="{{ $priceWithTax }}">
             <div class="container mx-auto px-4">
                 <h1 class="text-2xl font-semibold mb-4">Booking Room in
                     {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $room->category->name))) }}</h1>
