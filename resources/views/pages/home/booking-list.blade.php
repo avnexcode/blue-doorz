@@ -29,6 +29,7 @@
                                                 <th class="text-left px-4 py-2">Check In</th>
                                                 <th class="text-left px-4 py-2">Check Out</th>
                                                 <th class="text-left px-4 py-2">Peymant Method</th>
+                                                <th class="text-left px-4 py-2">Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -53,16 +54,19 @@
                                                 <td class="text-sm text-gray-600 px-4 py-3">
                                                     {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->payment_method))) }}
                                                 </td>
+                                                <td class="text-sm text-gray-600 px-4 py-3">
+                                                    {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->status))) }}
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <div class="w-full flex items-center justify-between pt-5">
-                                        <div class="flex items-center justify-end w-full">
-                                            <p class="text-lg underline text-gray-800 cursor-pointer">Add to favorites
-                                            </p>
-                                            <p class="text-lg text-red-500 pl-5 cursor-pointer">Cancel</p>
-                                        </div>
+                                        @if ($transaction->status === 'pending' || $transaction->status === 'ongoig')
+                                            <div class="flex items-center justify-end w-full">
+                                                @include('pages.home.cancel')
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

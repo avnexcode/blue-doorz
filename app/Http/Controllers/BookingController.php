@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Room;
 use App\Models\Transaction;
+use App\Http\Controllers\Controller;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Http\Request;
 use App\Http\Requests\TransactionCreateRequest;
 
 class BookingController extends Controller
@@ -44,6 +46,28 @@ class BookingController extends Controller
         } else {
             return redirect()->back()->with('error', 'The selected room is not available.');
         }
+    }
+
+    public function update(Request $request)
+    {
+        $validatedData = $request->validate([
+            "transaction_id" => "required"
+        ], [
+            "transcation_id.required" => "ID transaksi harus ada."
+        ]);
+
+        $transaction = Transaction::findOrFail($validatedData["transaction_id"]);
+
+        $transaction->status = 'canceled';
+
+        if ($transaction->status === 'expired' || $transaction->status === 'canceled') {
+            $room = Room::findOrFail($transaction->room_id);
+            $room->status = 'available';
+            $room->save();
+        }
+        $transaction->save();
+        Alert::success('Success', 'Membatalkan pemesanan.');
+        return redirect()->route('booking.list');
     }
 
     public function list()

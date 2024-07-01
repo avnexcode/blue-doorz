@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/{id}/booking', [BookingController::class, 'index'])->name('booking');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/booking/list', [BookingController::class, 'list'])->name('booking.list');
+    Route::patch('/booking', [BookingController::class, 'update'])->name('booking.update');
 });
 
 require __DIR__ . '/auth.php';
