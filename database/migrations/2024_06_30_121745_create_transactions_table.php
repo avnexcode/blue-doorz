@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId("user_id")->nullable(false);
+
+            // $table->string('user_id');
+            // $table->foreign('user_id')->references('id')->on('user')->cascadeOnDelete()->cascadeOnUpdate();
+
             $table->foreignId("room_id")->nullable(false);
             $table->date('started_time')->nullable(false);
             $table->date('end_time')->nullable(false);

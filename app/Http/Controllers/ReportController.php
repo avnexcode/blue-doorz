@@ -46,10 +46,15 @@ class ReportController extends Controller
 
         $newTransactionIds = $validatedData['transaction_ids'];
 
-        $uniqueTransactionIds = array_diff($newTransactionIds, $existingTransactionIds);
+        $expiredTransactions = Transaction::whereIn('id', $newTransactionIds)
+            ->where('status', 'expired')
+            ->pluck('id')
+            ->toArray();
+
+        $uniqueTransactionIds = array_diff($expiredTransactions, $existingTransactionIds);
 
         if (empty($uniqueTransactionIds)) {
-            Alert::info('Peringatan', 'Semua data sudah ada dalam laporan sebelumnya.');
+            Alert::info('Peringatan', 'Tidak ada data yang perlu dilaporkan.');
             return redirect()->route('reports.index');
         }
 

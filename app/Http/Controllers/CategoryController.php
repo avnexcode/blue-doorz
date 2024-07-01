@@ -85,7 +85,7 @@ class CategoryController extends Controller
 
         $category->update($validatedData);
         Alert::success('Berhasil', 'Memperbarui Data Kategori');
-        return redirect(route('categories.index'));
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -102,10 +102,10 @@ class CategoryController extends Controller
         foreach ($rooms as $room) {
             $room->category_id = null;
             $room->save();
-        }
+        }   
         $category->delete();
         Alert::success('Berhasil', 'Menghapus data kategori');
-        return redirect(route('categories.index'));
+        return redirect()->route('categories.index');
     }
 
     protected function generateSlug(string $name): string

@@ -17,7 +17,6 @@ class RoomController extends Controller
     public function index()
     {
         $rooms = Room::with('category')->filter(request()->only('search', 'category'))->paginate(10);
-
         return view('pages.dashboard.room.index', [
             'title' => "Dashboard Room",
             'rooms' => RoomResource::collection($rooms)
@@ -54,7 +53,7 @@ class RoomController extends Controller
         
         Alert::success('Berhasil', 'Menambahkan Data Room Baru');
 
-        return redirect(route('rooms.index'))->with('success', 'Aku sudah bisa laravel');
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -99,7 +98,7 @@ class RoomController extends Controller
 
         Alert::success('Berhasil', 'Memperbarui Data Ruangan');
         
-        return redirect(route('rooms.index'));
+        return redirect()->route('rooms.index');
     }
 
     /**
@@ -109,7 +108,7 @@ class RoomController extends Controller
     {
         $room->delete();
         Alert::success('Berhasil', 'Menghapus data.');
-        return redirect(route('rooms.index'));
+        return redirect()->route('rooms.index');
     }
 
     protected function generateSlug(string $name): string

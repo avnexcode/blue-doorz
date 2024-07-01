@@ -78,7 +78,7 @@ class TransactionController extends Controller
 
         $transaction->save();
         Alert::success('Success', 'Memperbarui status transaksi.');
-        return redirect(route('transactions.index'));
+        return redirect()->route('transactions.index');
     }
 
     /**
@@ -91,6 +91,6 @@ class TransactionController extends Controller
         $room->save();
         $transaction->delete();
         Alert::success('Berhasil', 'Menghapus data.');
-        return redirect(route('transactions.index'));
+        return redirect()->route('transactions.index');
     }
 }
