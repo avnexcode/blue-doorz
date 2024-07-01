@@ -13,9 +13,7 @@
             <input type="hidden" name="room_id" value="{{ $room->id }}">
             <input type="hidden" name="total_price" value="{{ $priceWithTax }}">
             <div class="container mx-auto px-4">
-                <h1 class="text-2xl font-semibold mb-4">Booking Room in
-                    {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $room->category->name))) }}</h1>
-                <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex flex-col md:flex-row gap-4 mt-10">
                     <div class="md:w-3/4">
                         <div class="bg-white rounded-lg shadow-md p-6 mb-4">
                             <table class="w-full">

@@ -27,7 +27,7 @@ class Transaction extends Model
         "nik"
     ];
 
-    public function customer()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -43,11 +43,11 @@ class Transaction extends Model
         $query->when(
             $filters['search'] ?? false,
             fn ($query, $search) => $query
-                ->where('price', 'like', "%$search%")
+                ->where('total_price', 'like', "%$search%")
                 ->orWhere('status', 'like', "%$search%")
                 ->orWhere('payment_method', 'like', "%$search%")
                 ->orWhereHas(
-                    'customer',
+                    'user',
                     fn ($query) =>
                     $query->where('name', 'like', "%$search%")
                         ->orWhere('email', 'like', "%$search%")

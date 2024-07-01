@@ -3,7 +3,6 @@
 use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/{id}/booking', [BookingController::class, 'index'])->name('booking');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/list', [BookingController::class, 'list'])->name('booking.list');
 });
 
 require __DIR__ . '/auth.php';

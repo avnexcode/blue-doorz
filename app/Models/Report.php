@@ -15,13 +15,8 @@ class Report extends Model
     public $timestamps = true;
     public $incrementing = true;
     protected $fillable = [
-        "transaction_id",
+        "transaction_ids",
     ];
-
-    public function transactions()
-    {
-        return $this->hasMany(User::class, 'user_id');
-    }
 
     public function scopeFilter($query, array $filters)
     {

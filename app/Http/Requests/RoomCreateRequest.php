@@ -32,7 +32,7 @@ class RoomCreateRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             "category_id.integer" => "Kategori harus berupa angka.",

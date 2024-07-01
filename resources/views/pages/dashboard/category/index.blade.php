@@ -24,7 +24,7 @@
                         <div class="rounded-t mb-0 px-4 py-3 border-0">
                             <div class="flex flex-wrap items-center justify-between">
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                                    <h3 class="font-semibold text-base text-blueGray-700">AH AH AH</h3>
+                                    <h3 class="font-semibold text-base text-blueGray-700">Table Data</h3>
                                 </div>
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                                     <form class="flex items-center gap-1 justify-end">
@@ -74,13 +74,7 @@
                                                     <div class="flex gap-2 justify-center">
                                                         <a class="bg-sky-500 text-white active:bg-sky-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                                             href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                                                        <form action="{{ route('categories.destroy', $category->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150">Delete</button>
-                                                        </form>
+                                                        @include('pages.dashboard.category.delete')
                                                     </div>
                                                 </td>
                                             </tr>
@@ -93,7 +87,6 @@
                                         </tr>
                                     @endif
                                 </tbody>
-
                             </table>
                         </div>
                     </main>
@@ -101,4 +94,5 @@
             </div>
         </div>
     </div>
+
 </x-app-layout>

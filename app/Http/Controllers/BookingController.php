@@ -37,6 +37,15 @@ class BookingController extends Controller
         }
     }
 
+    public function list()
+    {
+        $transactions = auth()->user()->transactions;
+        return view('pages.home.booking-list', [
+            'title' => "History List",
+            'transactions' => $transactions
+        ]);
+    }
+
     private function calculateDay(array $data)
     {
         $startedTime = Carbon::parse($data['started_time']);

@@ -6,7 +6,9 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Database\Seeders\RoomSeeder;
+use Database\Seeders\ReportSeeder;
 use Database\Seeders\CategorySeeder;
+use Database\Seeders\TransactionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,7 +42,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoomSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            TransactionSeeder::class,
+            ReportSeeder::class,
         ]);
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('slug', 100)->nullable(false)->unique();
             $table->string('image', 255)->nullable(false);
             $table->text('description')->nullable(false);
-            $table->string('price', 50)->nullable(false);
+            $table->string('price', 150)->nullable(false);
             $table->enum('status', ['booked', 'available'])->nullable(false);
             $table->timestamps();
         });

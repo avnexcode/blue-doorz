@@ -1,4 +1,4 @@
-<footer class="footer px-10 py-20 bg-base-200 text-base-content mt-20">
+<footer class="footer px-10 py-20 bg-base-200 text-base-content">
     <aside>
         <div class="shrink-0 flex items-center">
             <a href="{{ route('dashboard') }}">

@@ -17,7 +17,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('customer', 'room')->filter(request()->only('search'))->paginate(10);
+        $transactions = Transaction::with('user', 'room')->filter(request()->only('search'))->paginate(10);
         return view('pages.dashboard.transaction.index', [
             "title" => "Dashboard Transaction",
             "transactions" => TransactionResource::collection($transactions)
@@ -86,6 +86,9 @@ class TransactionController extends Controller
      */
     public function destroy(Transaction $transaction)
     {
+        $room = Room::findOrFail($transaction['room_id']);
+        $room->status = 'available';
+        $room->save();
         $transaction->delete();
         Alert::success('Berhasil', 'Menghapus data.');
         return redirect(route('transactions.index'));

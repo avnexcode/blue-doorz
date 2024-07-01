@@ -17,7 +17,7 @@
                         <div class="rounded-t mb-0 px-4 py-3 border-0">
                             <div class="flex flex-wrap items-center justify-between">
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                                    <h3 class="font-semibold text-base text-blueGray-700">AH AH AH</h3>
+                                    <h3 class="font-semibold text-base text-blueGray-700">Table Data</h3>
                                 </div>
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                                     <form class="flex items-center gap-1 justify-end">
@@ -32,7 +32,7 @@
                                                 type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         </div>
                                         <div class="flex items-center">
-                                            <a href="{{ route('rooms.index') }}"
+                                            <a href="{{ route('transactions.index') }}"
                                                 class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                                 type="submit"><i class="fa-solid fa-rotate-right"></i></a>
                                         </div>
@@ -85,7 +85,7 @@
                                                 </th>
                                                 <th
                                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                                    {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->customer->name))) }}
+                                                    {{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->user->name))) }}
                                                 </th>
                                                 <td
                                                     class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-sm whitespace-nowrap p-4 ">
@@ -110,13 +110,7 @@
                                                             href="{{ route('transactions.show', $transaction->id) }}">Detail</a>
                                                         <a class="bg-sky-500 text-white active:bg-sky-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                                             href="{{ route('transactions.edit', $transaction->id) }}">Edit</a>
-                                                        <form action="{{ route('transactions.destroy', $transaction->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150">Delete</button>
-                                                        </form>
+                                                        @include('pages.dashboard.transaction.delete')
                                                     </div>
                                                 </td>
                                             </tr>

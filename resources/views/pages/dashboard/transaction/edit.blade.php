@@ -24,7 +24,7 @@
                             <div class="my-5 flex flex-col">
                                 <x-input-label :value="__('Customer')" />
                                 <x-text-input
-                                    value="{{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->customer->name))) }}"
+                                    value="{{ str_replace(' ', ' ', ucwords(str_replace('_', ' ', $transaction->user->name))) }}"
                                     readonly disabled />
                             </div>
                             {{-- Input Phone --}}
@@ -37,7 +37,7 @@
                             {{-- Input Email --}}
                             <div class="my-5 flex flex-col">
                                 <x-input-label :value="__('Email')" />
-                                <x-text-input value="{{ $transaction->customer->email }}" readonly disabled />
+                                <x-text-input value="{{ $transaction->user->email }}" readonly disabled />
                             </div>
                             {{-- Input NIK --}}
                             <div class="my-5 flex flex-col">

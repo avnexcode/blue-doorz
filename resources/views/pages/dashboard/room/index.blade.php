@@ -25,7 +25,7 @@
 
                             <div class="flex flex-wrap items-center justify-between">
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                                    <h3 class="font-semibold text-base text-blueGray-700">AH AH AH</h3>
+                                    <h3 class="font-semibold text-base text-blueGray-700">Table Data</h3>
                                 </div>
                                 <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                                     <form class="flex items-center gap-1 justify-end">
@@ -110,13 +110,7 @@
                                                             href="{{ route('rooms.show', $room->id) }}">Detail</a>
                                                         <a class="bg-sky-500 text-white active:bg-sky-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                                             href="{{ route('rooms.edit', $room->id) }}">Edit</a>
-                                                        <form action="{{ route('rooms.destroy', $room->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150">Delete</button>
-                                                        </form>
+                                                        @include('pages.dashboard.room.delete')
                                                     </div>
                                                 </td>
                                             </tr>

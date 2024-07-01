@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("transaction_id")->nullable(false);
-            $table->string('total_price')->nullable(false);
+            $table->json("transaction_ids")->nullable(false);
             $table->timestamps();
         });
     }

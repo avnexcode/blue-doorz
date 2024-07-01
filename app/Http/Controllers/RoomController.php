@@ -7,9 +7,7 @@ use App\Http\Requests\RoomUpdateRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\Category;
 use App\Models\Room;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 class RoomController extends Controller
 {
@@ -53,6 +51,7 @@ class RoomController extends Controller
         }
 
         Room::create($validatedData);
+        
         Alert::success('Berhasil', 'Menambahkan Data Room Baru');
 
         return redirect(route('rooms.index'))->with('success', 'Aku sudah bisa laravel');
@@ -97,7 +96,9 @@ class RoomController extends Controller
         }
 
         $room->update($validatedData);
+
         Alert::success('Berhasil', 'Memperbarui Data Ruangan');
+        
         return redirect(route('rooms.index'));
     }
 

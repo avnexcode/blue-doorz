@@ -103,7 +103,6 @@ class CategoryController extends Controller
             $room->category_id = null;
             $room->save();
         }
-
         $category->delete();
         Alert::success('Berhasil', 'Menghapus data kategori');
         return redirect(route('categories.index'));

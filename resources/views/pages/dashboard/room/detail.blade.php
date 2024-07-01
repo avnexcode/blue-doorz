@@ -48,12 +48,7 @@
                                     href="{{ route('rooms.index') }}">Back</a>
                                 <a class="bg-sky-500 text-white active:bg-sky-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150"
                                     href="{{ route('rooms.edit', $room->id) }}">Edit</a>
-                                <form action="{{ route('rooms.destroy', $room->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button
-                                        class="bg-red-500 text-white active:bg-red-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none ease-linear transition-all duration-150">Delete</button>
-                                </form>
+                                @include('pages.dashboard.room.delete')
                             </div>
                         </div>
                     </main>

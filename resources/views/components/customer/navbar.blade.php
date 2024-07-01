@@ -8,9 +8,10 @@
                 </svg>
             </div>
             <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                <li><a>Homepage</a></li>
-                <li><a>Portfolio</a></li>
-                <li><a>About</a></li>
+                <li>
+                    <a href="{{ route('pages.home') }}" class="text-lg">Homepage</a>
+                </li>
+                <li><a href="{{ route('booking.list') }}" class="text-lg">Booking List</a></li>
             </ul>
         </div>
     </div>
@@ -19,10 +20,10 @@
                 alt="logo" width="200"></a>
     </div>
     <div class="navbar-end">
-        <div class="form-control">
+        <div class="form-control mr-5">
             <form action="">
                 <input type="text" placeholder="Search" name="search" value="{{ request('search') }}"
-                    class="input input-bordered w-[400px] h-8 mr-5" autocomplete="off" />
+                    class="input input-bordered w-[400px] h-8" autocomplete="off" />
             </form>
         </div>
         <div class="dropdown dropdown-end">

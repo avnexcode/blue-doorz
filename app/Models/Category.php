@@ -15,7 +15,7 @@ class Category extends Model
     public $timestamps = true;
     public $incrementing = true;
 
-    protected $filable = [
+    protected $fillable = [
         "name",
         "slug"
     ];
